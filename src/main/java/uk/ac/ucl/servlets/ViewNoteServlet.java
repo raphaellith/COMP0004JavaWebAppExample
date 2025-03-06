@@ -1,5 +1,7 @@
 package uk.ac.ucl.servlets;
 
+import java.net.URLDecoder;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -7,32 +9,35 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.model.Note;
 
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-// The servlet invoked to display a list of patients. Note that this data is just example data,
-// you replace it with your data.
-// The url http://localhost:8080/patientList.html is mapped to calling doGet on the servlet object.
-// The servlet object is created automatically, you just provide the class.
-@WebServlet("/patientList.html")
-public class ViewPatientListServlet extends HttpServlet {
-
+// Displays a given note
+// The url http://localhost:8080/note.html is mapped to calling doGet on the servlet object.
+@WebServlet("/note.html")
+public class ViewNoteServlet extends HttpServlet {
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the data from the model
         Model model = ModelFactory.getModel();
-        List<String> patientNames = model.getPatientNames();
+        String nameToSearch = request.getParameter("noteName");
+        Note targetNote = model.getIndex().getNote(nameToSearch);
+
         // Then add the data to the request object that will be sent to the Java Server Page, so that
         // the JSP can access the data (a Java data structure).
-        request.setAttribute("patientNames", patientNames);
+        request.setAttribute("targetNote", targetNote);
+        request.setAttribute("test", "2");
 
-        // Invoke the JSP.
-        // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
+        // Invoke the JSP
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/patientList.jsp");
+        RequestDispatcher dispatch = context.getRequestDispatcher("/note.jsp");
         dispatch.forward(request, response);
     }
 }
