@@ -3,15 +3,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
+<%
+    Note note = (Note) request.getAttribute("noteObj");
+%>
+
 <head>
     <meta charset="UTF-8">
-    <title>Note</title>
+    <title>Note: <%=note.getTitle()%></title>
 </head>
 <body>
-    <%
-          Note note = (Note) request.getAttribute("noteObj");
-    %>
-
     <h2><%=note.getTitle()%></h2>
     <%=note.getContents()%>
 </body>

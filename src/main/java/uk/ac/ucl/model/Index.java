@@ -8,6 +8,25 @@ import java.util.Map;
 import java.io.File;
 import java.io.IOException;
 
+/*
+Represents an index holding a collection of notes.
+The index can be initialised by reading from a JSON file of the following structure:
+
+    [
+        NOTE_REPRESENTATION,
+        NOTE_REPRESENTATION,
+        NOTE_REPRESENTATION,
+        ...
+    ]
+
+where each NOTE_REPRESENTATION is a dictionary as follows:
+
+    {
+        "title": String,
+        "contents": String
+    }
+*/
+
 public class Index {
     private ArrayList<Note> notes;
 
@@ -16,7 +35,8 @@ public class Index {
     }
 
     public void readFrom(String notesDataFilePath) {
-        // Overwrites this.notes with the data from the .json file, specified in notesDataFilePath.
+        // Overwrites this.notes with the data from the .json file,
+        // which is specified using notesDataFilePath.
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -29,7 +49,7 @@ public class Index {
             );
 
             for (Map<String, String> dict : readJSON) {
-                this.notes.add(new Note(dict.get("name"), dict.get("contents")));
+                this.notes.add(new Note(dict.get("title"), dict.get("contents")));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,11 +61,14 @@ public class Index {
     }
 
     public Note getNote(String name) {
+        // Returns a note in the index by name.
+        // If the note is not found, a note saying "Note not found!" will be returned.
+
         for (Note n: getNotes()) {
             if (n.getTitle().equals(name)) {
                 return n;
             }
         }
-        return new Note("Can't find note", "Can't find note");
+        return new Note("Note not found!", "An error has occurred - this note cannot be found.");
     }
 }

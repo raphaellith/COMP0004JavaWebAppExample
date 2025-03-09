@@ -1,18 +1,18 @@
 [
     {
-        "name": "Lorem Ipsum Title",
+        "title": "Lorem Ipsum Title",
         "contents": "Lorem ipsum dolor sit amet..."
     },
     {
-        "name": "Insert title here",
+        "title": "Insert title here",
         "contents": "Hello world!"
     },
     {
-        "name": "Another test",
+        "title": "Another test",
         "contents": "This is another test!"
     },
     {
-        "name": "SingleWordTitle",
+        "title": "SingleWordTitle",
         "contents": "This is a note with a single word title!"
     }
 ]

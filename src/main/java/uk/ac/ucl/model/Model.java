@@ -1,14 +1,7 @@
 package uk.ac.ucl.model;
 
-import java.io.Reader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
+// The main model used to handle operations of the program.
+// The Model object has access to the main Index object.
 
 public class Model {
     private Index index;
