@@ -19,7 +19,7 @@
             for (Note note : notes) {
         %>
         <li>
-            <a href=<%="note.html?noteName=" + URLEncoder.encode(note.getTitle(), StandardCharsets.UTF_8)%>>
+            <a href=<%="note.html?noteTitle=" + URLEncoder.encode(note.getTitle(), StandardCharsets.UTF_8)%>>
                 <%=note.getTitle()%>
             </a>
         </li>

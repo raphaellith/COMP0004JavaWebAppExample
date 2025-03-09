@@ -8,16 +8,11 @@
         "contents": "Hello world!"
     },
     {
-        "name": "Duplicate test",
-        "contents": "This is a duplicate test!"
+        "name": "Another test",
+        "contents": "This is another test!"
     },
     {
-        "name": "Duplicate test",
-        "contents": "This is a duplicate test!"
-    }
-,
-    {
         "name": "SingleWordTitle",
-        "contents": "This is a duplicate test!"
+        "contents": "This is a note with a single word title!"
     }
 ]

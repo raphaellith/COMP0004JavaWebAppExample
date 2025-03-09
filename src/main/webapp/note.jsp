@@ -1,5 +1,5 @@
 <%@ page import="uk.ac.ucl.model.Note" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
 </head>
 <body>
     <%
-          Note note = (Note) request.getAttribute("targetNote");
+          Note note = (Note) request.getAttribute("noteObj");
     %>
 
     <h2><%=note.getTitle()%></h2>
