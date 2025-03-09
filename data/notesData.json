@@ -1,18 +1,35 @@
-[
-    {
-        "title": "Lorem Ipsum Title",
-        "contents": "Lorem ipsum dolor sit amet..."
-    },
-    {
-        "title": "Insert title here",
-        "contents": "Hello world!"
-    },
-    {
-        "title": "Another test",
-        "contents": "This is another test!"
-    },
-    {
-        "title": "SingleWordTitle",
-        "contents": "This is a note with a single word title!"
-    }
-]
+{
+    "indexTitle": "Main",
+
+    "noteEntries": [
+        {
+            "noteTitle": "Lorem Ipsum Title",
+            "contents": "Lorem ipsum dolor sit amet..."
+        },
+        {
+            "noteTitle": "Insert title here",
+            "contents": "Hello world!"
+        }
+    ],
+
+    "indexEntries": [
+        {
+            "indexTitle": "Sub-index",
+
+            "noteEntries": [
+                {
+                    "noteTitle": "Another test",
+                    "contents": "This is another test!"
+                },
+                {
+                    "noteTitle": "SingleWordTitle",
+                    "contents": "This is a note with a single word title!"
+                }
+            ],
+
+            "indexEntries": [
+
+            ]
+        }
+    ]
+}

@@ -3,21 +3,14 @@ package uk.ac.ucl.model;
 // Represents a note.
 // Each note has a title and contents.
 
-public class Note {
-    private String title;
+import java.util.ArrayList;
+
+public class Note extends IndexEntry {
     private String contents;
 
     public Note(String title, String contents) {
-        this.title = title;
+        super(title);
         this.contents = contents;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContents() {
@@ -26,6 +19,15 @@ public class Note {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    @Override
+    public IndexEntry getEntryByParsedPath(ArrayList<String> parsedPath) {
+        if (parsedPath.isEmpty()) {
+            return this;
+        }
+
+        return null;
     }
 }
 

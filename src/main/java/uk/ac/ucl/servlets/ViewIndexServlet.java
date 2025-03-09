@@ -11,30 +11,27 @@ import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.Index;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
-import uk.ac.ucl.model.Note;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 
 // Displays a given note
-// The url http://localhost:8080/note.html is mapped to calling doGet on the servlet object.
-@WebServlet("/noteView.html")
-public class ViewNoteServlet extends HttpServlet {
+// The url http://localhost:8080/indexView.html is mapped to calling doGet on the servlet object.
+@WebServlet("/indexView.html")
+public class ViewIndexServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Get the data from the model
         Model model = ModelFactory.getModel();
-        String path = URLDecoder.decode(request.getParameter("path"), StandardCharsets.UTF_8);
+        String path = request.getParameter("path");
 
-        Note note = (Note) model.getEntryByPath(path);
+        Index index = (Index) model.getEntryByPath(path);
 
-        request.setAttribute("noteObj", note);
+        request.setAttribute("indexObj", index);
         request.setAttribute("currentPath", path);
 
         // Invoke the JSP
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/noteView.jsp");
+        RequestDispatcher dispatch = context.getRequestDispatcher("/indexView.jsp");
         dispatch.forward(request, response);
     }
 }
