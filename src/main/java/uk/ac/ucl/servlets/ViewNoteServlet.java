@@ -32,7 +32,7 @@ public class ViewNoteServlet extends HttpServlet {
 
         // Invoke the JSP
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/note.jsp");
+        RequestDispatcher dispatch = context.getRequestDispatcher("/noteView.jsp");
         dispatch.forward(request, response);
     }
 }
