@@ -9,6 +9,7 @@
     <title>Note Collection System</title>
     <jsp:include page="meta.jsp"/>
 </head>
+
 <body>
 
 <jsp:include page="header.jsp"/>
@@ -17,7 +18,10 @@
     <%
         Model model = ModelFactory.getModel();
     %>
-    <a href=<%="/indexView.html?path=" + model.getRootIndexName()%> class="button"> Click here to view notes</a>
+
+    <a href=<%="/indexView.html?path=" + model.getRootIndexName()%> class="button">
+        Click here to view notes
+    </a>
 </nav>
 
 </body>
