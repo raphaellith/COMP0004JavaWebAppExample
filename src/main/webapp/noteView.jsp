@@ -11,9 +11,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Note: <%=note.getTitle()%></title>
+    <jsp:include page="meta.jsp"/>
 </head>
 <body>
-    <h2><%=note.getTitle()%></h2>
+    <jsp:include page="header.jsp"/>
+
+    <h1>Note: <span style="font-weight: normal"><%=note.getTitle()%></span></h1>
     <%=note.getContents()%>
 </body>
 </html>

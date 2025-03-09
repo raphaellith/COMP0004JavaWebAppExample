@@ -8,22 +8,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Note Collection System</title>
+  <jsp:include page="meta.jsp"/>
 </head>
 <body>
-<h2>Note Collection System</h2>
+
+<jsp:include page="header.jsp"/>
+
+<%
+  Index index = (Index) request.getAttribute("indexObj");
+  String currentPath = request.getAttribute("currentPath").toString();
+%>
+
+<h1>Index: <span style="font-weight: normal"><%=index.getTitle()%></span></h1>
 
 <nav>
+  <h3>Sub-indices:</h3>
 
   <%
-    Index index = (Index) request.getAttribute("indexObj");
-    String currentPath = request.getAttribute("currentPath").toString();
+    ArrayList<Index> indices = index.getIndexEntries();
+    if (indices.isEmpty()) {
   %>
-
-  <h3>Indices:</h3>
-
+  <i>No sub-indices here.</i>
+  <% } else {%>
   <ol>
     <%
-      ArrayList<Index> indices = index.getIndexEntries();
       for (Index i : indices) {
     %>
     <li>
@@ -35,12 +43,23 @@
       }
     %>
   </ol>
+  <%}%>
+
+  <div style="margin-bottom: 3em;"></div>
 
   <h3>Notes:</h3>
 
+  <%
+    ArrayList<Note> notes = index.getNoteEntries();
+    if (notes.isEmpty()) {
+  %>
+  <i>No notes here.</i>
+  <%
+    } else {
+  %>
+
   <ol>
     <%
-      ArrayList<Note> notes = index.getNoteEntries();
       for (Note n : notes) {
     %>
     <li>
@@ -48,10 +67,9 @@
         <%=n.getTitle()%>
       </a>
     </li>
-    <%
-      }
-    %>
+    <%}%>
   </ol>
+  <%}%>
 </nav>
 
 </body>

@@ -1,24 +1,23 @@
 <%@ page import="uk.ac.ucl.model.ModelFactory" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="uk.ac.ucl.model.Note" %>
-<%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="uk.ac.ucl.model.Model" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Note Collection System</title>
+    <jsp:include page="meta.jsp"/>
 </head>
 <body>
-<h2>Note Collection System</h2>
+
+<jsp:include page="header.jsp"/>
 
 <nav>
     <%
         Model model = ModelFactory.getModel();
     %>
-    <a href=<%="/indexView.html?path=" + model.getRootIndexName()%>> Click here!</a>
+    <a href=<%="/indexView.html?path=" + model.getRootIndexName()%> class="button"> Click here to view notes</a>
 </nav>
 
 </body>

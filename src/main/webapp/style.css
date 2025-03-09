@@ -1,0 +1,54 @@
+:root {
+    --white: #e7ecef;
+    --lightBlue: #A3CEF1;
+    --blue: #6096BA;
+    --darkBlue: #274c77;
+    --grey: #8B8C89';
+}
+
+.clearBoth {
+    clear: both;
+}
+
+.header {
+    color: var(--darkBlue);
+    background: var(--lightBlue);
+    padding: 10px;
+    border-radius: 5px;
+    height: 20px;
+    line-height: 20px;  /* Same as height for vertical alignment */
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--darkBlue);
+    color: var(--white);
+    margin: 1.5%;
+}
+
+.button {
+    background-color: var(--lightBlue);
+    color: var(--darkBlue);
+    padding: 20px 32px;
+    font-size: large;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+li {
+    margin: 10px 0;
+}
+
+a {
+    color: var(--white);
+}
+
