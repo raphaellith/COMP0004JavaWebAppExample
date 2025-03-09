@@ -14,13 +14,10 @@ import uk.ac.ucl.model.ModelFactory;
 
 import java.io.IOException;
 
-// Displays a given note
-// The url http://localhost:8080/indexView.html is mapped to calling doGet on the servlet object.
 @WebServlet("/indexView.html")
 public class ViewIndexServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // Get the data from the model
         Model model = ModelFactory.getModel();
         String path = request.getParameter("path");
 

@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import uk.ac.ucl.model.Index;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
@@ -17,13 +16,10 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
-// Displays a given note
-// The url http://localhost:8080/note.html is mapped to calling doGet on the servlet object.
 @WebServlet("/noteView.html")
 public class ViewNoteServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // Get the data from the model
         Model model = ModelFactory.getModel();
         String path = URLDecoder.decode(request.getParameter("path"), StandardCharsets.UTF_8);
 
