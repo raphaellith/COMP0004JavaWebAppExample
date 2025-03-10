@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<form method="POST" action="/saveNote.html">
+<form method="POST" action="saveNote.html">
     <h1>
         Note:
         <input type="text" class="noteTitleEditInput" name="noteNewTitle" value="<%=note.getTitle()%>">
