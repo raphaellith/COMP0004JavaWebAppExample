@@ -25,5 +25,4 @@ public abstract class IndexEntry {
         ArrayList<String> parsedPath = new ArrayList<>(Arrays.asList(parsedPathArray));
         return getEntryByParsedPath(parsedPath);
     }
-
 }

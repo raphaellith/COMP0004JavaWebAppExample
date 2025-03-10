@@ -3,6 +3,8 @@
 <%@ page import="uk.ac.ucl.model.Note" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="uk.ac.ucl.model.Index" %>
+<%@ page import="uk.ac.ucl.model.Model" %>
+<%@ page import="uk.ac.ucl.model.ModelFactory" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,12 +21,24 @@
 
 <%
     Index index = (Index) request.getAttribute("indexObj");
+    Model model = ModelFactory.getModel();
     String currentPath = request.getAttribute("currentPath").toString();
 %>
 
 <h1>Index: <span style="font-weight: normal"><%=index.getTitle()%></span></h1>
 
 <nav>
+    <%
+        ArrayList<String> parsedPath = model.parsePath(currentPath);
+        parsedPath.removeLast();
+        if (!parsedPath.isEmpty()) {
+            String backHref = "/indexView.html?path=" + model.unparsePath(parsedPath);
+    %>
+        <a class="button ui-button" href=<%=backHref%>>
+            Back
+        </a>
+    <%}%>
+
     <h3>Sub-indices:</h3>
 
     <%

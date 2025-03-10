@@ -19,7 +19,7 @@
         Model model = ModelFactory.getModel();
     %>
 
-    <a class="button" href=<%="/indexView.html?path=" + model.getRootIndexName()%>>
+    <a class="button" id="start-button" href=<%="/indexView.html?path=" + model.getRootIndexName()%>>
         Click here to view notes
     </a>
 </nav>

@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.io.File;
 import java.io.IOException;
 
@@ -24,8 +22,8 @@ public class Index extends IndexEntry {
         this.indexEntries = new ArrayList<>();
     }
 
-    public void readFrom(JsonNode rootNode) {
-        this.setTitle(rootNode.path("indexTitle").asText());
+    public JsonNode readFrom(JsonNode rootNode) {
+        this.setTitle(rootNode.path("indexTitle").asText().strip());
         this.noteEntries.clear();
         this.indexEntries.clear();
 
@@ -36,8 +34,8 @@ public class Index extends IndexEntry {
             JsonNode jsonNoteEntry = jsonNoteEntriesIterator.next();
             this.noteEntries.add(
                     new Note(
-                            jsonNoteEntry.path("noteTitle").asText(),
-                            jsonNoteEntry.path("contents").asText()
+                            jsonNoteEntry.path("noteTitle").asText().strip(),
+                            jsonNoteEntry.path("contents").asText().strip()
                     )
             );
         }
@@ -52,10 +50,12 @@ public class Index extends IndexEntry {
             index.readFrom(jsonIndexEntry);
             this.indexEntries.add(index);
         }
+
+        return rootNode;
     }
 
 
-    public void readFrom(String notesDataFilePath) {
+    public JsonNode readFrom(String notesDataFilePath) {
         // Overwrites this.notes with the data from the .json file,
         // which is specified using notesDataFilePath.
 
@@ -63,11 +63,11 @@ public class Index extends IndexEntry {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(new File(notesDataFilePath));
             readFrom(rootNode);
+            return rootNode;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-
-
     }
 
     public ArrayList<Note> getNoteEntries() {
@@ -105,7 +105,6 @@ public class Index extends IndexEntry {
 
     @Override
     public IndexEntry getEntryByParsedPath(ArrayList<String> parsedPath) {
-        System.out.println("The parsed path: " + parsedPath);
         if (parsedPath.isEmpty()) {
             return this;
         }
