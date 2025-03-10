@@ -1,7 +1,5 @@
 package uk.ac.ucl.model;
 
-import java.io.IOException;
-
 // Provides other classes access to the Model object via the static method ModelFactory.getModel()
 // There should only be one single Model object throughout the use of the program
 
