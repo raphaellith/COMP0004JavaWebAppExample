@@ -15,7 +15,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
 public class AbstractGetNoteServlet extends HttpServlet {
-    private String pathToDestinationJSP;
+    private final String pathToDestinationJSP;
 
     public AbstractGetNoteServlet(String pathToDestinationJSP) {
         this.pathToDestinationJSP = pathToDestinationJSP;

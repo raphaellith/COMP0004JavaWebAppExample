@@ -22,7 +22,7 @@ public class Index extends IndexEntry {
         this.indexEntries = new ArrayList<>();
     }
 
-    public JsonNode readFrom(JsonNode rootNode) {
+    public void readFrom(JsonNode rootNode) {
         this.setTitle(rootNode.path("indexTitle").asText().strip());
         this.noteEntries.clear();
         this.indexEntries.clear();
@@ -51,13 +51,13 @@ public class Index extends IndexEntry {
             this.indexEntries.add(index);
         }
 
-        return rootNode;
     }
 
 
     public JsonNode readFrom(String notesDataFilePath) {
         // Overwrites this.notes with the data from the .json file,
         // which is specified using notesDataFilePath.
+        // Returns root node.
 
         try {
             ObjectMapper mapper = new ObjectMapper();
