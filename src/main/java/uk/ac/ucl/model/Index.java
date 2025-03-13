@@ -126,6 +126,10 @@ public class Index extends IndexEntry {
         indexEntries.add(new Index(title));
     }
 
+    public void addNote(String title) {
+        noteEntries.add(new Note(title, ""));
+    }
+
     @Override
     public IndexEntry getEntryByPath(IndexEntryPath path) {
         if (path.isEmpty()) {

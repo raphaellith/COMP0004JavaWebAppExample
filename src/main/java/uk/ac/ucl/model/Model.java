@@ -154,7 +154,7 @@ public class Model {
 
             ObjectNode newNote = mapper.createObjectNode();
             newNote.put("noteTitle", path.getTitle());
-            newNote.put("contents", "Type here...");
+            newNote.put("contents", "");
 
             jsonNoteEntries.add(newNote);
         } else {

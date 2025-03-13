@@ -25,7 +25,12 @@ public class SaveNoteServlet extends HttpServlet {
         String pathToDestinationJSP;
 
         IndexEntryPath potentialNewPath = currentPath.getParentPath().getNoteChildPath(newTitle);
-        boolean validTitle = !(newTitle.contains("!") || newTitle.contains("/") || model.pathExists(potentialNewPath));
+
+        boolean validTitle = !(
+                newTitle.contains("!") ||
+                newTitle.contains("/") ||
+                (!newTitle.equals(currentPath.getTitle()) && model.pathExists(potentialNewPath))
+        );
 
         if (validTitle) {
             note.setTitle(newTitle);

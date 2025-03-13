@@ -91,6 +91,13 @@
         <%}%>
     </ol>
     <%}%>
+
+    <%
+        String addNoteHref = "/addNote.html?path=" + currentPath.getURLEncoding();
+    %>
+    <a class="button ui-button" href="<%=addNoteHref%>">
+        Add
+    </a>
 </nav>
 
 </body>
