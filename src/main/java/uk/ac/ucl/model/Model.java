@@ -142,4 +142,32 @@ public class Model {
 
         writeChangesToJsonFile();
     }
+
+    public void addJsonNode(IndexEntryPath path) {
+        IndexEntryPath parentIndexPath = path.getParentPath();
+        JsonNode jsonParentIndex = getJsonNodeByPath(parentIndexPath);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        if (path.isNote()) {
+            ArrayNode jsonNoteEntries = (ArrayNode) jsonParentIndex.path("noteEntries");
+
+            ObjectNode newNote = mapper.createObjectNode();
+            newNote.put("noteTitle", path.getTitle());
+            newNote.put("contents", "Type here...");
+
+            jsonNoteEntries.add(newNote);
+        } else {
+            ArrayNode jsonIndexEntries = (ArrayNode) jsonParentIndex.path("indexEntries");
+
+            ObjectNode newIndex = mapper.createObjectNode();
+            newIndex.put("indexTitle", path.getTitle());
+            newIndex.set("noteEntries", mapper.createArrayNode());
+            newIndex.set("indexEntries", mapper.createArrayNode());
+
+            jsonIndexEntries.add(newIndex);
+        }
+
+        writeChangesToJsonFile();
+    }
 }

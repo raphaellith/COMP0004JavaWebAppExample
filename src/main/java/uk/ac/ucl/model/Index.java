@@ -122,6 +122,10 @@ public class Index extends IndexEntry {
         }
     }
 
+    public void addIndex(String title) {
+        indexEntries.add(new Index(title));
+    }
+
     @Override
     public IndexEntry getEntryByPath(IndexEntryPath path) {
         if (path.isEmpty()) {

@@ -61,6 +61,13 @@
     </ol>
     <% } %>
 
+    <%
+        String addIndexHref = "/addIndex.html?path=" + currentPath.getURLEncoding();
+    %>
+    <a class="button ui-button" href="<%=addIndexHref%>">
+        Add
+    </a>
+
     <div style="margin-bottom: 3em;"></div>
 
     <h3>Notes:</h3>
