@@ -15,8 +15,8 @@ import uk.ac.ucl.model.ModelFactory;
 
 import java.io.IOException;
 
-@WebServlet("/deleteNote.html")
-public class DeleteNoteServlet extends HttpServlet {
+@WebServlet("/deleteIndex.html")
+public class DeleteIndexServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Model model = ModelFactory.getModel();
@@ -25,7 +25,7 @@ public class DeleteNoteServlet extends HttpServlet {
         IndexEntryPath parentIndexPath = currentPath.getParentPath();
         Index parentIndex = (Index) model.getEntryByPath(parentIndexPath);
 
-        parentIndex.removeNoteByTitle(currentPath.getTitle());
+        parentIndex.removeIndexByTitle(currentPath.getTitle());
         model.deleteJsonNode(currentPath);
 
         request.setAttribute("indexObj", parentIndex);

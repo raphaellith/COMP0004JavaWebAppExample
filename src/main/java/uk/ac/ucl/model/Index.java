@@ -112,6 +112,16 @@ public class Index extends IndexEntry {
         return null;
     }
 
+    public void removeIndexByTitle(String title) {
+        for (int i = 0; i < indexEntries.size(); i++) {
+            Index index = indexEntries.get(i);
+            if (index.getTitle().equals(title)) {
+                indexEntries.remove(i);
+                break;
+            }
+        }
+    }
+
     @Override
     public IndexEntry getEntryByPath(IndexEntryPath path) {
         if (path.isEmpty()) {

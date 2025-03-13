@@ -25,10 +25,15 @@
     <%
         IndexEntryPath parentPath = currentPath.getParentPath();
         if (!parentPath.isEmpty()) {
-            String backHref = "/indexView.html?path=" + parentPath.getUnparsed();
+            String backHref = "/indexView.html?path=" + parentPath.getURLEncoding();
+            String deleteHref = "/deleteIndex.html?path=" + currentPath.getURLEncoding();
     %>
         <a class="button ui-button" href=<%=backHref%>>
             Back
+        </a>
+
+        <a class="button ui-button" href=<%=deleteHref%>>
+            Delete
         </a>
     <%}%>
 

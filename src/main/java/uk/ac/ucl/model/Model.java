@@ -115,7 +115,7 @@ public class Model {
         writeChangesToJsonFile();
     }
 
-    public void deleteNoteJsonNode(IndexEntryPath path) {
+    public void deleteJsonNode(IndexEntryPath path) {
         IndexEntryPath parentIndexPath = path.getParentPath();
 
         JsonNode jsonParentIndex = getJsonNodeByPath(parentIndexPath);
