@@ -26,6 +26,7 @@
 
     <div style="margin-bottom: 0.75em; font-weight: bold">
         The title of a note cannot contain the characters "/" or "!".
+        Duplicate note titles in the same index are not allowed.
     </div>
 
     <input type="submit" class="button ui-button" value="Save">

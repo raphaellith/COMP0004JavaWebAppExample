@@ -34,7 +34,7 @@ public class IndexEntryPath {
         return getUnparsed();
     }
 
-    public Boolean isEmpty() {
+    public boolean isEmpty() {
         return parsed.isEmpty();
     }
 

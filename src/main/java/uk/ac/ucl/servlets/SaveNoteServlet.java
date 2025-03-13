@@ -20,18 +20,19 @@ public class SaveNoteServlet extends HttpServlet {
         String newTitle = request.getParameter("noteNewTitle").strip();
         String newContents = request.getParameter("noteNewContents").strip();
 
-        boolean validTitle = !(newTitle.contains("!") || newTitle.contains("/"));
-
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("currentPath"));
         Note note = (Note) model.getEntryByPath(currentPath);
         String pathToDestinationJSP;
+
+        IndexEntryPath potentialNewPath = currentPath.getParentPath().getNoteChildPath(newTitle);
+        boolean validTitle = !(newTitle.contains("!") || newTitle.contains("/") || model.pathExists(potentialNewPath));
 
         if (validTitle) {
             note.setTitle(newTitle);
             note.setContents(newContents);
             model.updateNoteJsonNode(currentPath, newTitle, newContents);
 
-            currentPath = currentPath.getParentPath().getNoteChildPath(newTitle);
+            currentPath = potentialNewPath;
 
             pathToDestinationJSP = "/noteView.jsp?path=" + currentPath.getURLEncoding();
         } else {

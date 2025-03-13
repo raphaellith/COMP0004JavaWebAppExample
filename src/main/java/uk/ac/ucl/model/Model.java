@@ -42,6 +42,10 @@ public class Model {
         return index.getEntryByPath(path);
     }
 
+    public boolean pathExists(IndexEntryPath path) {
+        return getEntryByPath(path) != null;
+    }
+
     public JsonNode getJsonNodeByPath(IndexEntryPath path) {
         path = path.copy();
         String firstSubstring = path.removeFirst();
