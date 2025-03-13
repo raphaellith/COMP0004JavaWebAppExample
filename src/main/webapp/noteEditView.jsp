@@ -30,7 +30,7 @@
         <textarea class="noteContentsEditInput" name="noteNewContents"><%=note.getContents()%></textarea>
     </p>
 
-    <input type="hidden" name="currentPath" value="<%=request.getAttribute("currentPath").toString()%>">
+    <input type="hidden" name="currentPath" value="<%=request.getAttribute("currentPath")%>">
 </form>
 </body>
 </html>

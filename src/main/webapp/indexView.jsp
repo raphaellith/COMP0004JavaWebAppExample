@@ -1,10 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.net.URLEncoder" %>
-<%@ page import="uk.ac.ucl.model.Note" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>
-<%@ page import="uk.ac.ucl.model.Index" %>
-<%@ page import="uk.ac.ucl.model.Model" %>
-<%@ page import="uk.ac.ucl.model.ModelFactory" %>
+<%@ page import="uk.ac.ucl.model.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,18 +18,16 @@
 
 <%
     Index index = (Index) request.getAttribute("indexObj");
-    Model model = ModelFactory.getModel();
-    String currentPath = request.getAttribute("currentPath").toString();
+    IndexEntryPath currentPath = (IndexEntryPath) request.getAttribute("currentPath");
 %>
 
 <h1>Index: <span style="font-weight: normal"><%=index.getTitle()%></span></h1>
 
 <nav>
     <%
-        ArrayList<String> parsedPath = model.parsePath(currentPath);
-        parsedPath.removeLast();
-        if (!parsedPath.isEmpty()) {
-            String backHref = "/indexView.html?path=" + model.unparsePath(parsedPath);
+        IndexEntryPath parentPath = currentPath.getParentPath();
+        if (!parentPath.isEmpty()) {
+            String backHref = "/indexView.html?path=" + parentPath.getUnparsed();
     %>
         <a class="button ui-button" href=<%=backHref%>>
             Back
@@ -51,10 +46,12 @@
     <% } else { %>
 
     <ol>
-        <% for (Index i : indices) { %>
+        <% for (Index i : indices) {
+            String indexTitle = i.getTitle();
+        %>
         <li>
-            <a href=<%="indexView.html?path=" + currentPath + URLEncoder.encode("/" + i.getTitle(), StandardCharsets.UTF_8)%>>
-                <%=i.getTitle()%>
+            <a href=<%="indexView.html?path=" + currentPath.getChildPath(indexTitle).getURLEncoding()%>>
+                <%=indexTitle%>
             </a>
         </li>
         <% } %>
@@ -77,7 +74,7 @@
     <ol>
         <% for (Note n : notes) { %>
         <li>
-            <a href=<%="noteView.html?path=" + currentPath + URLEncoder.encode("/!" + n.getTitle(), StandardCharsets.UTF_8)%>>
+            <a href=<%="noteView.html?path=" + currentPath.getChildPath("!" + n.getTitle()).getURLEncoding()%>>
                 <%=n.getTitle()%>
             </a>
         </li>

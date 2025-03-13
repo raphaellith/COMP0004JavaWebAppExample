@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import uk.ac.ucl.model.Index;
+import uk.ac.ucl.model.IndexEntryPath;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 
@@ -19,8 +20,7 @@ public class ViewIndexServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Model model = ModelFactory.getModel();
-        String path = request.getParameter("path");
-
+        IndexEntryPath path = new IndexEntryPath(request.getParameter("path"));
         Index index = (Index) model.getEntryByPath(path);
 
         request.setAttribute("indexObj", index);

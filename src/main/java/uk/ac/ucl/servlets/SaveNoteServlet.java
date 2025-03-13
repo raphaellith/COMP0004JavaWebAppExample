@@ -7,9 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import uk.ac.ucl.model.Model;
-import uk.ac.ucl.model.ModelFactory;
-import uk.ac.ucl.model.Note;
+import uk.ac.ucl.model.*;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -19,15 +17,12 @@ import java.nio.charset.StandardCharsets;
 public class SaveNoteServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("doing post");
-
         Model model = ModelFactory.getModel();
 
         String newTitle = request.getParameter("noteNewTitle");
         String newContents = request.getParameter("noteNewContents");
 
-        String currentPath = request.getParameter("currentPath");
-        System.out.println(currentPath);
+        IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("currentPath"));
 
         Note note = (Note) model.getEntryByPath(currentPath);
 
@@ -42,7 +37,8 @@ public class SaveNoteServlet extends HttpServlet {
         // Invoke the JSP
         ServletContext context = getServletContext();
         RequestDispatcher dispatch = context.getRequestDispatcher(
-                "/noteView.jsp?path=" + URLEncoder.encode(currentPath, StandardCharsets.UTF_8));
+                "/noteView.jsp?path=" + URLEncoder.encode(currentPath.getUnparsed(), StandardCharsets.UTF_8)
+        );
         dispatch.forward(request, response);
     }
 }

@@ -4,6 +4,7 @@
 <%@ page import="uk.ac.ucl.model.Model" %>
 <%@ page import="uk.ac.ucl.model.ModelFactory" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="uk.ac.ucl.model.IndexEntryPath" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
@@ -11,8 +12,7 @@
 
 <%
     Note note = (Note) request.getAttribute("noteObj");
-    Model model = ModelFactory.getModel();
-    String currentPath = request.getAttribute("currentPath").toString();
+    IndexEntryPath currentPath = (IndexEntryPath) request.getAttribute("currentPath");
 %>
 
 <head>
@@ -29,14 +29,8 @@
     </h1>
 
     <%
-        String editHref = "/noteEditView.html?path=" + URLEncoder.encode(
-                currentPath,
-                StandardCharsets.UTF_8
-        );
-
-        ArrayList<String> parsedPath = model.parsePath(currentPath);
-        parsedPath.removeLast();
-        String backHref = "/indexView.html?path=" + model.unparsePath(parsedPath);
+        String editHref = "/noteEditView.html?path=" + currentPath.getURLEncoding();
+        String backHref = "/indexView.html?path=" + currentPath.getParentPath().getURLEncoding();
     %>
 
     <a class="button ui-button" href=<%=backHref%>>

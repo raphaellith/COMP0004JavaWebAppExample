@@ -104,12 +104,12 @@ public class Index extends IndexEntry {
     }
 
     @Override
-    public IndexEntry getEntryByParsedPath(ArrayList<String> parsedPath) {
-        if (parsedPath.isEmpty()) {
+    public IndexEntry getEntryByPath(IndexEntryPath path) {
+        if (path.isEmpty()) {
             return this;
         }
 
-        String firstSubstring = parsedPath.removeFirst();
+        String firstSubstring = path.removeFirst();
 
         if (firstSubstring.charAt(0) == '!') {  // Referring to a note
             String noteTitleToSearch = firstSubstring.substring(1);
@@ -119,7 +119,7 @@ public class Index extends IndexEntry {
                 return null;
             }
 
-            return noteObtained.getEntryByParsedPath(parsedPath);
+            return noteObtained.getEntryByPath(path);
 
         } else {  // Referring to an index
             Index indexObtained = getIndexByTitle(firstSubstring);
@@ -128,7 +128,7 @@ public class Index extends IndexEntry {
                 return null;
             }
 
-            return indexObtained.getEntryByParsedPath(parsedPath);
+            return indexObtained.getEntryByPath(path);
         }
     }
 }

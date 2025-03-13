@@ -9,8 +9,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class Model {
@@ -35,31 +33,18 @@ public class Model {
         return this.rootIndexName;
     }
 
-    public IndexEntry getEntryByParsedPath(ArrayList<String> parsedPath) {
-        String firstSubstring = parsedPath.removeFirst();
-
-        if (!firstSubstring.equals(rootIndexName)) {
+    public IndexEntry getEntryByPath(IndexEntryPath path) {
+        path = path.copy();
+        if (!path.removeFirst().equals(rootIndexName)) {
             return null;
         }
 
-        return index.getEntryByParsedPath(parsedPath);
+        return index.getEntryByPath(path);
     }
 
-    public ArrayList<String> parsePath(String path) {
-        String[] parsedPathArray = path.split("/");
-        return new ArrayList<>(Arrays.asList(parsedPathArray));
-    }
-
-    public String unparsePath(ArrayList<String> parsedPath) {
-        return String.join("/", parsedPath);
-    }
-
-    public IndexEntry getEntryByPath(String path) {
-        return getEntryByParsedPath(parsePath(path));
-    }
-
-    public JsonNode getJsonNodeByParsedPath(ArrayList<String> parsedPath) {
-        String firstSubstring = parsedPath.removeFirst();
+    public JsonNode getJsonNodeByPath(IndexEntryPath path) {
+        path = path.copy();
+        String firstSubstring = path.removeFirst();
 
         if (!firstSubstring.equals(rootIndexName)) {
             return null;
@@ -67,10 +52,8 @@ public class Model {
 
         JsonNode currIndexNode = rootJsonNode;
 
-        while (!parsedPath.isEmpty()) {
-            String head = parsedPath.removeFirst();
-
-            System.out.println("HEAD: " + head);
+        while (!path.isEmpty()) {
+            String head = path.removeFirst();
 
             if (head.charAt(0) == '!') {  // Referring to a note
                 String noteTitleToSearch = head.substring(1);
@@ -80,8 +63,6 @@ public class Model {
 
                 while (jsonNoteEntriesIterator.hasNext()) {
                     JsonNode jsonNoteEntry = jsonNoteEntriesIterator.next();
-                    System.out.println(noteTitleToSearch);
-                    System.out.println(jsonNoteEntry.path("noteTitle").asText());
                     if (jsonNoteEntry.path("noteTitle").asText().equals(noteTitleToSearch)) {
                         return jsonNoteEntry;
                     }
@@ -96,10 +77,8 @@ public class Model {
 
                 while (jsonIndexEntriesIterator.hasNext()) {
                     JsonNode jsonIndexEntry = jsonIndexEntriesIterator.next();
-                    System.out.println("CHECKING AGAINST: " + jsonIndexEntry.path("indexTitle").asText());
                     if (jsonIndexEntry.path("indexTitle").asText().equals(head)) {
                         currIndexNode = jsonIndexEntry;
-                        System.out.println("FOUND");
                     }
                 }
 
@@ -112,11 +91,7 @@ public class Model {
         return currIndexNode;
     }
 
-    public JsonNode getJsonNodeByPath(String path) {
-        return getJsonNodeByParsedPath(parsePath(path));
-    }
-
-    public void updateNoteJsonNode(String path, String newTitle, String newContents) {
+    public void updateNoteJsonNode(IndexEntryPath path, String newTitle, String newContents) {
         JsonNode noteEntry = getJsonNodeByPath(path);
 
         ((ObjectNode) noteEntry).put("noteTitle", newTitle);

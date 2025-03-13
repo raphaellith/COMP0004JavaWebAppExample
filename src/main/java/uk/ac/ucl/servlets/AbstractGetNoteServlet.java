@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import uk.ac.ucl.model.IndexEntryPath;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
@@ -24,7 +25,9 @@ public class AbstractGetNoteServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Model model = ModelFactory.getModel();
-        String path = URLDecoder.decode(request.getParameter("path"), StandardCharsets.UTF_8);
+        IndexEntryPath path = new IndexEntryPath(
+                URLDecoder.decode(request.getParameter("path"), StandardCharsets.UTF_8)
+        );
 
         Note note = (Note) model.getEntryByPath(path);
 
