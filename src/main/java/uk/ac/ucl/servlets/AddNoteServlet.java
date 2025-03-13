@@ -36,7 +36,7 @@ public class AddNoteServlet extends HttpServlet {
         }
 
         currentIndex.addNote(newNoteTitle);
-        model.addJsonNode(currentPath.getIndexChildPath(newNoteTitle));
+        model.addJsonNode(currentPath.getNoteChildPath(newNoteTitle));
 
         request.setAttribute("indexObj", currentIndex);
         request.setAttribute("currentPath", currentPath);

@@ -35,6 +35,7 @@ public class SaveNoteServlet extends HttpServlet {
         if (validTitle) {
             note.setTitle(newTitle);
             note.setContents(newContents);
+            System.out.println("HERE");
             model.updateNoteJsonNode(currentPath, newTitle, newContents);
 
             currentPath = potentialNewPath;
