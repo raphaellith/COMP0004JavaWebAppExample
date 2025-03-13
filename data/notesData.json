@@ -1,1 +1,1 @@
-{"indexTitle":"Main","noteEntries":[{"noteTitle":"Lorem Ipsum Title","contents":"lorem ipsum dolor sit amet..."}],"indexEntries":[{"indexTitle":"Sub-index","noteEntries":[{"noteTitle":"A sub-index document","contents":"I am inside a sub-index document!"},{"noteTitle":"SingleWordTitle","contents":"This is a note with a single word title!"}],"indexEntries":[]}]}
+{"indexTitle":"Main","noteEntries":[{"noteTitle":"Lorem Ipsum Title","contents":"lorem ipsum dolor sit amet..."}],"indexEntries":[{"indexTitle":"New index new name","noteEntries":[],"indexEntries":[]}]}

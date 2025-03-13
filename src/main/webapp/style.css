@@ -62,7 +62,7 @@ a {
     color: var(--white);
 }
 
-.noteTitleEditInput {
+.noteTitleEditInput, .indexTitleEditInput {
     font-size: xx-large;
     font-family: Arial, sans-serif;
 }

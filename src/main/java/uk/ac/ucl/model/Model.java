@@ -115,6 +115,14 @@ public class Model {
         writeChangesToJsonFile();
     }
 
+    public void updateIndexJsonNode(IndexEntryPath path, String newTitle) {
+        JsonNode indexEntry = getJsonNodeByPath(path);
+
+        ((ObjectNode) indexEntry).put("indexTitle", newTitle);
+
+        writeChangesToJsonFile();
+    }
+
     public void deleteJsonNode(IndexEntryPath path) {
         IndexEntryPath parentIndexPath = path.getParentPath();
 
