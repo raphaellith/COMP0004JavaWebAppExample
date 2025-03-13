@@ -12,8 +12,6 @@ import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.Note;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 
 public class AbstractGetNoteServlet extends HttpServlet {
     private final String pathToDestinationJSP;
@@ -25,9 +23,7 @@ public class AbstractGetNoteServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Model model = ModelFactory.getModel();
-        IndexEntryPath path = new IndexEntryPath(
-                URLDecoder.decode(request.getParameter("path"), StandardCharsets.UTF_8)
-        );
+        IndexEntryPath path = new IndexEntryPath(request.getParameter("path"));
 
         Note note = (Note) model.getEntryByPath(path);
 

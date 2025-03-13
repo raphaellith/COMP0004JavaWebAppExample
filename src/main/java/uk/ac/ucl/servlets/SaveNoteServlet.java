@@ -10,8 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.*;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 @WebServlet("/saveNote.html")
 public class SaveNoteServlet extends HttpServlet {
@@ -36,9 +34,7 @@ public class SaveNoteServlet extends HttpServlet {
 
         // Invoke the JSP
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher(
-                "/noteView.jsp?path=" + URLEncoder.encode(currentPath.getUnparsed(), StandardCharsets.UTF_8)
-        );
+        RequestDispatcher dispatch = context.getRequestDispatcher("/noteView.jsp?path=" + currentPath.getURLEncoding());
         dispatch.forward(request, response);
     }
 }
