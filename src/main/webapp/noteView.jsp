@@ -26,6 +26,7 @@
     <%
         String editHref = "/noteEditView.html?path=" + currentPath.getURLEncoding();
         String backHref = "/indexView.html?path=" + currentPath.getParentPath().getURLEncoding();
+        String deleteHref = "/deleteNote.html?path=" + currentPath.getURLEncoding();
     %>
 
     <a class="button ui-button" href=<%=backHref%>>
@@ -33,6 +34,9 @@
     </a>
     <a class="button ui-button" href=<%=editHref%>>
         Edit
+    </a>
+    <a class="button ui-button" href=<%=deleteHref%>>
+        Delete
     </a>
 
     <p>

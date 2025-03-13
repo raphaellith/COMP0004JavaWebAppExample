@@ -82,7 +82,7 @@ public class Index extends IndexEntry {
         // Returns a note in the index by title
         // Returns null if the note is not found
 
-        for (Note n: getNoteEntries()) {
+        for (Note n: noteEntries) {
             if (n.getTitle().equals(title)) {
                 return n;
             }
@@ -90,12 +90,21 @@ public class Index extends IndexEntry {
         return null;
     }
 
+    public void removeNoteByTitle(String title) {
+        for (int i = 0; i < noteEntries.size(); i++) {
+            Note note = noteEntries.get(i);
+            if (note.getTitle().equals(title)) {
+                noteEntries.remove(i);
+                break;
+            }
+        }
+    }
 
     public Index getIndexByTitle(String title) {
         // Returns a sub-index in the index by title
         // Returns null if the note is not found
 
-        for (Index i: getIndexEntries()) {
+        for (Index i: indexEntries) {
             if (i.getTitle().equals(title)) {
                 return i;
             }

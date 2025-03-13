@@ -5,6 +5,7 @@ package uk.ac.ucl.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.File;
@@ -95,12 +96,7 @@ public class Model {
         return currIndexNode;
     }
 
-    public void updateNoteJsonNode(IndexEntryPath path, String newTitle, String newContents) {
-        JsonNode noteEntry = getJsonNodeByPath(path);
-
-        ((ObjectNode) noteEntry).put("noteTitle", newTitle);
-        ((ObjectNode) noteEntry).put("contents", newContents);
-
+    public void writeChangesToJsonFile() {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
@@ -108,5 +104,42 @@ public class Model {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateNoteJsonNode(IndexEntryPath path, String newTitle, String newContents) {
+        JsonNode noteEntry = getJsonNodeByPath(path);
+
+        ((ObjectNode) noteEntry).put("noteTitle", newTitle);
+        ((ObjectNode) noteEntry).put("contents", newContents);
+
+        writeChangesToJsonFile();
+    }
+
+    public void deleteNoteJsonNode(IndexEntryPath path) {
+        IndexEntryPath parentIndexPath = path.getParentPath();
+
+        JsonNode jsonParentIndex = getJsonNodeByPath(parentIndexPath);
+
+        if (path.isNote()) {
+            ArrayNode jsonNoteEntries = (ArrayNode) jsonParentIndex.path("noteEntries");
+
+            for (int i = 0; i < jsonNoteEntries.size(); i++) {
+                if (jsonNoteEntries.get(i).get("noteTitle").asText().equals(path.getTitle())) {
+                    jsonNoteEntries.remove(i);
+                    break;
+                }
+            }
+        } else {
+            ArrayNode jsonIndexEntries = (ArrayNode) jsonParentIndex.path("indexEntries");
+
+            for (int i = 0; i < jsonIndexEntries.size(); i++) {
+                if (jsonIndexEntries.get(i).get("indexTitle").asText().equals(path.getTitle())) {
+                    jsonIndexEntries.remove(i);
+                    break;
+                }
+            }
+        }
+
+        writeChangesToJsonFile();
     }
 }

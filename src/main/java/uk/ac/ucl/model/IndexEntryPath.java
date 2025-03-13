@@ -42,6 +42,19 @@ public class IndexEntryPath {
         return parsed.removeFirst();
     }
 
+    public String getTitle() {
+        String title = parsed.getLast();
+        if (title.startsWith("!")) {
+            return title.substring(1);
+        } else {
+            return title;
+        }
+    }
+
+    public boolean isNote() {
+        return parsed.getLast().startsWith("!");
+    }
+
     public IndexEntryPath copy() {  // Deep copy
         return new IndexEntryPath(new ArrayList<>(parsed));
     }
