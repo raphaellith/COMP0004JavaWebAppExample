@@ -17,6 +17,7 @@ public class Model {
     private String notesDataFilePath;
     private String rootIndexName;
     private JsonNode rootJsonNode;
+    private ObjectMapper mapper;
 
     public Model(String rootIndexName, String notesDataFilePath) {
         this.rootIndexName = rootIndexName;
@@ -24,6 +25,8 @@ public class Model {
 
         this.index = new Index(rootIndexName);
         this.rootJsonNode = this.index.readFrom(notesDataFilePath);
+
+        this.mapper = new ObjectMapper();
     }
 
     public Model(String notesDataFilePath) {
@@ -32,6 +35,10 @@ public class Model {
 
     public String getRootIndexName() {
         return this.rootIndexName;
+    }
+
+    public ObjectMapper getMapper() {
+        return mapper;
     }
 
     public IndexEntry getEntryByPath(IndexEntryPath path) {
@@ -97,8 +104,6 @@ public class Model {
     }
 
     public void writeChangesToJsonFile() {
-        ObjectMapper mapper = new ObjectMapper();
-
         try {
             mapper.writeValue(new File(notesDataFilePath), rootJsonNode);
         } catch (IOException e) {
@@ -154,8 +159,6 @@ public class Model {
     public void addJsonNode(IndexEntryPath path) {
         IndexEntryPath parentIndexPath = path.getParentPath();
         JsonNode jsonParentIndex = getJsonNodeByPath(parentIndexPath);
-
-        ObjectMapper mapper = new ObjectMapper();
 
         if (path.isNote()) {
             ArrayNode jsonNoteEntries = (ArrayNode) jsonParentIndex.path("noteEntries");

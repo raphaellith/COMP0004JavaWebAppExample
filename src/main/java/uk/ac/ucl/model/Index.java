@@ -1,7 +1,6 @@
 package uk.ac.ucl.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -59,9 +58,10 @@ public class Index extends IndexEntry {
         // which is specified using notesDataFilePath.
         // Returns root node.
 
+        Model model = ModelFactory.getModel();
+
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode rootNode = mapper.readTree(new File(notesDataFilePath));
+            JsonNode rootNode = model.getMapper().readTree(new File(notesDataFilePath));
             readFrom(rootNode);
             return rootNode;
         } catch (IOException e) {
