@@ -24,6 +24,10 @@
         <input type="text" class="noteTitleEditInput" name="noteNewTitle" value="<%=note.getTitle()%>">
     </h1>
 
+    <div style="margin-bottom: 0.75em; font-weight: bold">
+        The title of a note cannot contain the characters "/" or "!".
+    </div>
+
     <input type="submit" class="button ui-button" value="Save">
 
     <p>

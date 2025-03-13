@@ -17,24 +17,33 @@ public class SaveNoteServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Model model = ModelFactory.getModel();
 
-        String newTitle = request.getParameter("noteNewTitle");
-        String newContents = request.getParameter("noteNewContents");
+        String newTitle = request.getParameter("noteNewTitle").strip();
+        String newContents = request.getParameter("noteNewContents").strip();
+
+        boolean validTitle = !(newTitle.contains("!") || newTitle.contains("/"));
 
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("currentPath"));
-
         Note note = (Note) model.getEntryByPath(currentPath);
+        String pathToDestinationJSP;
 
-        note.setTitle(newTitle.strip());
-        note.setContents(newContents.strip());
+        if (validTitle) {
+            note.setTitle(newTitle);
+            note.setContents(newContents);
+            model.updateNoteJsonNode(currentPath, newTitle, newContents);
 
-        model.updateNoteJsonNode(currentPath, newTitle.strip(), newContents.strip());
+            currentPath = currentPath.getParentPath().getChildPath("!" + newTitle);
+
+            pathToDestinationJSP = "/noteView.jsp?path=" + currentPath.getURLEncoding();
+        } else {
+            pathToDestinationJSP = "/noteEditView.jsp?path=" + currentPath.getURLEncoding();
+        }
 
         request.setAttribute("noteObj", note);
         request.setAttribute("currentPath", currentPath);
 
         // Invoke the JSP
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/noteView.jsp?path=" + currentPath.getURLEncoding());
+        RequestDispatcher dispatch = context.getRequestDispatcher(pathToDestinationJSP);
         dispatch.forward(request, response);
     }
 }
