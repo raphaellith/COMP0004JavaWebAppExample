@@ -52,10 +52,14 @@ public class IndexEntryPath {
         return parentPath;
     }
 
-    public IndexEntryPath getChildPath(String child) {
+    public IndexEntryPath getIndexChildPath(String childTitle) {
         IndexEntryPath childPath = copy();
-        childPath.getParsed().add(child);
+        childPath.getParsed().add(childTitle);
         return childPath;
+    }
+
+    public IndexEntryPath getNoteChildPath(String childTitle) {
+        return getIndexChildPath("!" + childTitle);
     }
 
     public String getURLEncoding() {

@@ -31,7 +31,7 @@ public class SaveNoteServlet extends HttpServlet {
             note.setContents(newContents);
             model.updateNoteJsonNode(currentPath, newTitle, newContents);
 
-            currentPath = currentPath.getParentPath().getChildPath("!" + newTitle);
+            currentPath = currentPath.getParentPath().getNoteChildPath(newTitle);
 
             pathToDestinationJSP = "/noteView.jsp?path=" + currentPath.getURLEncoding();
         } else {

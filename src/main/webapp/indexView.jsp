@@ -48,7 +48,7 @@
             String indexTitle = i.getTitle();
         %>
         <li>
-            <a href=<%="indexView.html?path=" + currentPath.getChildPath(indexTitle).getURLEncoding()%>>
+            <a href=<%="indexView.html?path=" + currentPath.getIndexChildPath(indexTitle).getURLEncoding()%>>
                 <%=indexTitle%>
             </a>
         </li>
@@ -72,7 +72,7 @@
     <ol>
         <% for (Note n : notes) { %>
         <li>
-            <a href=<%="noteView.html?path=" + currentPath.getChildPath("!" + n.getTitle()).getURLEncoding()%>>
+            <a href=<%="noteView.html?path=" + currentPath.getNoteChildPath(n.getTitle()).getURLEncoding()%>>
                 <%=n.getTitle()%>
             </a>
         </li>
