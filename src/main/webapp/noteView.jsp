@@ -1,9 +1,4 @@
 <%@ page import="uk.ac.ucl.model.Note" %>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.nio.charset.StandardCharsets" %>
-<%@ page import="uk.ac.ucl.model.Model" %>
-<%@ page import="uk.ac.ucl.model.ModelFactory" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="uk.ac.ucl.model.IndexEntryPath" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 

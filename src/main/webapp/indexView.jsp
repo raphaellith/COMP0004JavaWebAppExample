@@ -1,6 +1,4 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="uk.ac.ucl.model.*" %>
 
 <!DOCTYPE html>
