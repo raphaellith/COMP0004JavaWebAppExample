@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class Model {
-    private Index index;
-    private String notesDataFilePath;
-    private String rootIndexName;
-    private JsonNode rootJsonNode;
+    private final Index index;
+    private final String notesDataFilePath;
+    private final String rootIndexName;
+    private final JsonNode rootJsonNode;
 
     public Model(String rootIndexName, String notesDataFilePath) {
         this.rootIndexName = rootIndexName;

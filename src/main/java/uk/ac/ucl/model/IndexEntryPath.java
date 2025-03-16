@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class IndexEntryPath {
-    private ArrayList<String> parsed;
+    private final ArrayList<String> parsed;
 
     public IndexEntryPath(ArrayList<String> parsed) {
         this.parsed = parsed;

@@ -1,26 +1,15 @@
 package uk.ac.ucl.servlets;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import uk.ac.ucl.model.Index;
 import uk.ac.ucl.model.IndexEntryPath;
 import uk.ac.ucl.model.Model;
-import uk.ac.ucl.model.ModelFactory;
-
-import java.io.IOException;
 
 @WebServlet("/deleteIndex.html")
-public class DeleteIndexServlet extends HttpServlet {
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Model model = ModelFactory.getModel();
-
+public class DeleteIndexServlet extends AbstractHttpServlet {
+    protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("path"));
         IndexEntryPath parentIndexPath = currentPath.getParentPath();
         Index parentIndex = (Index) model.getEntryByPath(parentIndexPath);
@@ -31,9 +20,6 @@ public class DeleteIndexServlet extends HttpServlet {
         request.setAttribute("indexObj", parentIndex);
         request.setAttribute("currentPath", parentIndexPath);
 
-        // Invoke the JSP
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/indexView.jsp");
-        dispatch.forward(request, response);
+        return "/indexView.jsp";
     }
 }

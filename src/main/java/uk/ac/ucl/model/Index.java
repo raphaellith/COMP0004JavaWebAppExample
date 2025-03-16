@@ -13,8 +13,8 @@ Represents an index holding a collection of notes or sub-indices
 */
 
 public class Index extends IndexEntry {
-    private ArrayList<Note> noteEntries;
-    private ArrayList<Index> indexEntries;
+    private final ArrayList<Note> noteEntries;
+    private final ArrayList<Index> indexEntries;
 
     public Index(String title) {
         super(title);
