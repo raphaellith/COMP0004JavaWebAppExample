@@ -35,7 +35,6 @@ public class AddIndexServlet extends AbstractHttpServlet {
         int n = 2;
 
         while (model.pathExists(currentPath.getIndexChildPath(newIndexTitle))) {
-            System.out.println(currentPath.getIndexChildPath(newIndexTitle));
             newIndexTitle = newIndexDefaultTitle + " " + n;
             n++;
         }

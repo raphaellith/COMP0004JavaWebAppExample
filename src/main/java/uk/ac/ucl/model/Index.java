@@ -83,13 +83,9 @@ public class Index extends IndexEntry {
         try {
             File notesDataFile = new File(notesDataFilePath);
 
-            System.out.println(notesDataFile.exists());
-
             if (!notesDataFile.exists()) {
                 createDefaultNotesDataFile(notesDataFile, defaultRootIndexName);
             }
-
-            System.out.println(notesDataFile.exists());
 
             ObjectMapper mapper = ObjectMapperFactory.getMapper();
             JsonNode rootNode = mapper.readTree(notesDataFile);

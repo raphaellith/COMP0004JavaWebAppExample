@@ -35,7 +35,6 @@ public class AddNoteServlet extends AbstractHttpServlet {
         int n = 2;
 
         while (model.pathExists(currentPath.getNoteChildPath(newNoteTitle))) {
-            System.out.println(currentPath.getNoteChildPath(newNoteTitle));
             newNoteTitle = newNoteDefaultTitle + " " + n;
             n++;
         }
