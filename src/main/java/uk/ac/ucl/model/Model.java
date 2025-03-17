@@ -198,17 +198,4 @@ public class Model {
 
         return Optional.of(potentialNewPath);
     }
-
-    public String escapeHTML(String input) {
-        // Escape special characters for use in HTML to avoid injection
-        if (input == null) {
-            return null;
-        }
-
-        return input.replace("&", "&amp;")  // Ampersand must come first as it is included in other replacements
-                .replace("<", "&lt;")
-                .replace(">", "&gt;")
-                .replace("\"", "&quot;")
-                .replace("'", "&#39;");
-    }
 }

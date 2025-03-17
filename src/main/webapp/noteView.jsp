@@ -1,5 +1,6 @@
 <%@ page import="uk.ac.ucl.model.Note" %>
 <%@ page import="uk.ac.ucl.model.IndexEntryPath" %>
+<%@ page import="uk.ac.ucl.model.TextFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
@@ -37,6 +38,6 @@
         Delete
     </a>
 
-    <p class="noteContents"><%=note.getContents()%></p>
+    <div class="noteContents"><%=TextFormatter.markdownToHTML(note.getContents())%></div>
 </body>
 </html>

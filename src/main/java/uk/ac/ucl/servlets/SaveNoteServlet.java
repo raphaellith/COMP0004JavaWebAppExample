@@ -23,7 +23,7 @@ public class SaveNoteServlet extends AbstractHttpServlet {
             IndexEntryPath newPath = potentialNewPath.get();
 
             // Escape HTML to prevent injection
-            newContents = model.escapeHTML(newContents);
+            newContents = TextFormatter.escapeHTML(newContents);
 
             // Update model
             note.setTitle(newTitle);
