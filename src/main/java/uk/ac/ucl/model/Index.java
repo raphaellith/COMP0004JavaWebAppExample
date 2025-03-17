@@ -3,6 +3,8 @@ package uk.ac.ucl.model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.File;
@@ -20,6 +22,34 @@ public class Index extends IndexEntry {
         super(title);
         this.noteEntries = new ArrayList<>();
         this.indexEntries = new ArrayList<>();
+    }
+
+    public void createDefaultNotesDataFile(File file) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+        Model model = ModelFactory.getModel();
+
+        /*
+        Default content:
+
+        {
+            "indexTitle" : "[root index name]",
+            "noteEntries" : [ ],
+            "indexEntries" : [ ]
+        }
+
+        */
+
+        bufferedWriter.write("{");
+        bufferedWriter.newLine();
+        bufferedWriter.write("\t\"indexTitle\": \"" + model.getRootIndexName() + "\",");
+        bufferedWriter.newLine();
+        bufferedWriter.write("\t\"noteEntries\": [ ],");
+        bufferedWriter.newLine();
+        bufferedWriter.write("\t\"indexEntries\": [ ]");
+        bufferedWriter.newLine();
+        bufferedWriter.write("}");
+
+        bufferedWriter.close();
     }
 
     public void readFrom(JsonNode rootNode) {
@@ -53,15 +83,20 @@ public class Index extends IndexEntry {
 
     }
 
-
     public JsonNode readFrom(String notesDataFilePath) {
         // Overwrites this.notes with the data from the .json file,
         // which is specified using notesDataFilePath.
         // Returns root node.
 
         try {
+            File notesDataFile = new File(notesDataFilePath);
+
+            if (!notesDataFile.exists()) {
+                createDefaultNotesDataFile(notesDataFile);
+            }
+
             ObjectMapper mapper = ObjectMapperFactory.getMapper();
-            JsonNode rootNode = mapper.readTree(new File(notesDataFilePath));
+            JsonNode rootNode = mapper.readTree(notesDataFile);
             readFrom(rootNode);
             return rootNode;
         } catch (IOException e) {

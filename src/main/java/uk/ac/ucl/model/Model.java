@@ -29,7 +29,7 @@ public class Model {
     }
 
     public Model(String notesDataFilePath) {
-        this("root", notesDataFilePath);
+        this("Root", notesDataFilePath);  // Default root index name: "Root"
     }
 
     public String getRootIndexName() {

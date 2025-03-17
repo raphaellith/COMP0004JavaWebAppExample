@@ -1,8 +1,0 @@
-{
-  "indexTitle" : "Main",
-  "noteEntries" : [ {
-    "noteTitle" : "New note",
-    "contents" : "Hey!\r\n\r\n\r\nI just skipped a few lines....\r\n\r\n    Indent here!\r\n\r\nAttack?\r\n\r\n&lt;script&gt;alert(&quot;Does this alert work?&quot;);&lt;/script&gt;\r\n\r\n&lt;b&gt;Bold?&lt;/b&gt;\r\n\r\nYay! No attacks!"
-  } ],
-  "indexEntries" : [ ]
-}
