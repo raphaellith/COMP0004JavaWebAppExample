@@ -9,8 +9,8 @@ import java.util.Optional;
 @WebServlet("/saveNote.html")
 public class SaveNoteServlet extends AbstractHttpServlet {
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
-        String newTitle = request.getParameter("noteNewTitle").strip();
-        String newContents = request.getParameter("noteNewContents").strip();
+        String newTitle = request.getParameter("noteNewTitle").strip();  // Strip title to remove whitespaces
+        String newContents = request.getParameter("noteNewContents");
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("currentPath"));
         Note note = (Note) model.getEntryByPath(currentPath);
         String pathToDestinationJSP;

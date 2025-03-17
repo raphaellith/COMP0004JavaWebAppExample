@@ -34,8 +34,8 @@ public class Index extends IndexEntry {
             JsonNode jsonNoteEntry = jsonNoteEntriesIterator.next();
             this.noteEntries.add(
                     new Note(
-                            jsonNoteEntry.path("noteTitle").asText().strip(),
-                            jsonNoteEntry.path("contents").asText().strip()
+                            jsonNoteEntry.path("noteTitle").asText(),
+                            jsonNoteEntry.path("contents").asText()
                     )
             );
         }

@@ -9,7 +9,7 @@ import java.util.Optional;
 @WebServlet("/saveIndex.html")
 public class SaveIndexServlet extends AbstractHttpServlet {
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
-        String newTitle = request.getParameter("indexNewTitle").strip();
+        String newTitle = request.getParameter("indexNewTitle").strip();  // Strip title to remove whitespaces
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("currentPath"));
         Index index = (Index) model.getEntryByPath(currentPath);
         String pathToDestinationJSP;
