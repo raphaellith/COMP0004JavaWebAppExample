@@ -8,7 +8,7 @@ public class ModelFactory {
 
     public static Model getModel() {
         if (model == null) {
-            model = new Model("data/notesData.json");
+            model = new Model("data/notesData.json", "Root");
         }
         return model;
     }

@@ -20,16 +20,12 @@ public class Model {
     private final String rootIndexName;
     private final JsonNode rootJsonNode;
 
-    public Model(String rootIndexName, String notesDataFilePath) {
-        this.rootIndexName = rootIndexName;
+    public Model(String notesDataFilePath, String defaultRootIndexName) {
         this.notesDataFilePath = notesDataFilePath;
 
-        this.index = new Index(rootIndexName);
-        this.rootJsonNode = this.index.readFrom(notesDataFilePath);
-    }
-
-    public Model(String notesDataFilePath) {
-        this("Root", notesDataFilePath);  // Default root index name: "Root"
+        this.index = new Index("");  // Placeholder title will be overwritten during readFrom
+        this.rootJsonNode = this.index.readFrom(notesDataFilePath, defaultRootIndexName);
+        this.rootIndexName = rootJsonNode.path("indexTitle").asText();
     }
 
     public String getRootIndexName() {

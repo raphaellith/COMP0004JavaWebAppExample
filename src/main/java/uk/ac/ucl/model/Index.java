@@ -2,6 +2,7 @@ package uk.ac.ucl.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,11 +11,11 @@ import java.util.Iterator;
 import java.io.File;
 import java.io.IOException;
 
-/*
-Represents an index holding a collection of notes or sub-indices
-*/
-
 public class Index extends IndexEntry {
+    /*
+    Represents an index. An Index holds a list of notes and a list of sub-indices.
+    */
+
     private final ArrayList<Note> noteEntries;
     private final ArrayList<Index> indexEntries;
 
@@ -24,9 +25,8 @@ public class Index extends IndexEntry {
         this.indexEntries = new ArrayList<>();
     }
 
-    public void createDefaultNotesDataFile(File file) throws IOException {
+    public void createDefaultNotesDataFile(File file, String rootIndexName) throws IOException {  // Called when JSON data file is not found
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-        Model model = ModelFactory.getModel();
 
         /*
         Default content:
@@ -36,12 +36,11 @@ public class Index extends IndexEntry {
             "noteEntries" : [ ],
             "indexEntries" : [ ]
         }
-
         */
 
         bufferedWriter.write("{");
         bufferedWriter.newLine();
-        bufferedWriter.write("\t\"indexTitle\": \"" + model.getRootIndexName() + "\",");
+        bufferedWriter.write("\t\"indexTitle\": \"" + rootIndexName + "\",");
         bufferedWriter.newLine();
         bufferedWriter.write("\t\"noteEntries\": [ ],");
         bufferedWriter.newLine();
@@ -52,16 +51,28 @@ public class Index extends IndexEntry {
         bufferedWriter.close();
     }
 
-    public void readFrom(JsonNode rootNode) {
+    public void readFrom(JsonNode rootNode) {  // For initialisation
         this.setTitle(rootNode.path("indexTitle").asText().strip());
+
         this.noteEntries.clear();
         this.indexEntries.clear();
 
-        JsonNode jsonNoteEntries = rootNode.path("noteEntries");
-        Iterator<JsonNode> jsonNoteEntriesIterator = jsonNoteEntries.elements();
+//        JsonNode jsonNoteEntries = rootNode.path("noteEntries");
+//        Iterator<JsonNode> jsonNoteEntriesIterator = jsonNoteEntries.elements();
+//
+//        while (jsonNoteEntriesIterator.hasNext()) {
+//            JsonNode jsonNoteEntry = jsonNoteEntriesIterator.next();
+//            this.noteEntries.add(
+//                    new Note(
+//                            jsonNoteEntry.path("noteTitle").asText(),
+//                            jsonNoteEntry.path("contents").asText()
+//                    )
+//            );
+//        }
 
-        while (jsonNoteEntriesIterator.hasNext()) {
-            JsonNode jsonNoteEntry = jsonNoteEntriesIterator.next();
+        ArrayNode jsonNoteEntries = (ArrayNode) rootNode.path("noteEntries");
+
+        for (JsonNode jsonNoteEntry: jsonNoteEntries) {
             this.noteEntries.add(
                     new Note(
                             jsonNoteEntry.path("noteTitle").asText(),
@@ -83,17 +94,21 @@ public class Index extends IndexEntry {
 
     }
 
-    public JsonNode readFrom(String notesDataFilePath) {
-        // Overwrites this.notes with the data from the .json file,
+    public JsonNode readFrom(String notesDataFilePath, String defaultRootIndexName) {
+        // Overwrites this.noteEntries and this.indexEntries with the data from the .json file,
         // which is specified using notesDataFilePath.
-        // Returns root node.
+        // Returns the JsonNode corresponding to this index.
 
         try {
             File notesDataFile = new File(notesDataFilePath);
 
+            System.out.println(notesDataFile.exists());
+
             if (!notesDataFile.exists()) {
-                createDefaultNotesDataFile(notesDataFile);
+                createDefaultNotesDataFile(notesDataFile, defaultRootIndexName);
             }
+
+            System.out.println(notesDataFile.exists());
 
             ObjectMapper mapper = ObjectMapperFactory.getMapper();
             JsonNode rootNode = mapper.readTree(notesDataFile);
