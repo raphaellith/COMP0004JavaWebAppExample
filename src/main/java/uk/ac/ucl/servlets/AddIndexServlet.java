@@ -13,7 +13,21 @@ public class AddIndexServlet extends AbstractHttpServlet {
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("path"));
         Index currentIndex = (Index) model.getEntryByPath(currentPath);
 
-        // Avoids having duplicate titles called "New index"
+        String newIndexTitle = newIndexTitle(currentPath, model);
+
+        currentIndex.addIndex(newIndexTitle);  // Update model
+        model.addJsonNode(currentPath.getIndexChildPath(newIndexTitle));  // Update JSON
+
+        request.setAttribute("indexObj", currentIndex);
+        request.setAttribute("currentPath", currentPath);
+
+        return "/indexView.jsp";
+    }
+
+    private String newIndexTitle(IndexEntryPath currentPath, Model model) {
+        // Returns a possible new title for a sub-index of the Index specified by the currentPath
+        // Sub-indices of the same index should not share names
+
         String newIndexDefaultTitle = "New index";
         String newIndexTitle = newIndexDefaultTitle;
         int n = 2;
@@ -24,12 +38,6 @@ public class AddIndexServlet extends AbstractHttpServlet {
             n++;
         }
 
-        currentIndex.addIndex(newIndexTitle);
-        model.addJsonNode(currentPath.getIndexChildPath(newIndexTitle));
-
-        request.setAttribute("indexObj", currentIndex);
-        request.setAttribute("currentPath", currentPath);
-
-        return "/indexView.jsp";
+        return newIndexTitle;
     }
 }

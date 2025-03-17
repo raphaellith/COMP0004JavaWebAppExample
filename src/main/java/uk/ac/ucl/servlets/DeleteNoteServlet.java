@@ -14,8 +14,8 @@ public class DeleteNoteServlet extends AbstractHttpServlet {
         IndexEntryPath parentIndexPath = currentPath.getParentPath();
         Index parentIndex = (Index) model.getEntryByPath(parentIndexPath);
 
-        parentIndex.removeNoteByTitle(currentPath.getTitle());
-        model.deleteJsonNode(currentPath);
+        parentIndex.removeNoteByTitle(currentPath.getTitle());  // Update model
+        model.deleteJsonNode(currentPath);  // Update JSON
 
         request.setAttribute("indexObj", parentIndex);
         request.setAttribute("currentPath", parentIndexPath);

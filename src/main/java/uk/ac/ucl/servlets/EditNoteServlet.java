@@ -11,7 +11,6 @@ import uk.ac.ucl.model.Note;
 public class EditNoteServlet extends AbstractHttpServlet {
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath path = new IndexEntryPath(request.getParameter("path"));
-
         Note note = (Note) model.getEntryByPath(path);
 
         request.setAttribute("noteObj", note);

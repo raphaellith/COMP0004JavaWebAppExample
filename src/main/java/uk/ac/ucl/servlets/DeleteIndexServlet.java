@@ -14,8 +14,8 @@ public class DeleteIndexServlet extends AbstractHttpServlet {
         IndexEntryPath parentIndexPath = currentPath.getParentPath();
         Index parentIndex = (Index) model.getEntryByPath(parentIndexPath);
 
-        parentIndex.removeIndexByTitle(currentPath.getTitle());
-        model.deleteJsonNode(currentPath);
+        parentIndex.removeIndexByTitle(currentPath.getTitle());  // Update model
+        model.deleteJsonNode(currentPath);  // Update JSON
 
         request.setAttribute("indexObj", parentIndex);
         request.setAttribute("currentPath", parentIndexPath);

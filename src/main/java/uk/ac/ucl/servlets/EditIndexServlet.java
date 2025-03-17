@@ -8,7 +8,6 @@ import uk.ac.ucl.model.*;
 public class EditIndexServlet extends AbstractHttpServlet {
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath path = new IndexEntryPath(request.getParameter("path"));
-
         Index index = (Index) model.getEntryByPath(path);
 
         request.setAttribute("indexObj", index);

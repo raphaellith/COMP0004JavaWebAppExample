@@ -13,7 +13,21 @@ public class AddNoteServlet extends AbstractHttpServlet {
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("path"));
         Index currentIndex = (Index) model.getEntryByPath(currentPath);
 
-        // Avoids having duplicate titles called "New note"
+        String newNoteTitle = newNoteTitle(currentPath, model);
+
+        currentIndex.addNote(newNoteTitle);  // Update model
+        model.addJsonNode(currentPath.getNoteChildPath(newNoteTitle));  // Update JSON
+
+        request.setAttribute("indexObj", currentIndex);
+        request.setAttribute("currentPath", currentPath);
+
+        return "/indexView.jsp";
+    }
+
+    private String newNoteTitle(IndexEntryPath currentPath, Model model) {
+        // Returns a possible new title for note in the Index specified by the currentPath
+        // Notes in the same index should not share names
+
         String newNoteDefaultTitle = "New note";
         String newNoteTitle = newNoteDefaultTitle;
         int n = 2;
@@ -24,12 +38,6 @@ public class AddNoteServlet extends AbstractHttpServlet {
             n++;
         }
 
-        currentIndex.addNote(newNoteTitle);
-        model.addJsonNode(currentPath.getNoteChildPath(newNoteTitle));
-
-        request.setAttribute("indexObj", currentIndex);
-        request.setAttribute("currentPath", currentPath);
-
-        return "/indexView.jsp";
+        return newNoteTitle;
     }
 }

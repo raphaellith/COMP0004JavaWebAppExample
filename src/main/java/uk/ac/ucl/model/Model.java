@@ -11,6 +11,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class Model {
     private final Index index;
@@ -176,5 +178,32 @@ public class Model {
         }
 
         writeChangesToJsonFile();
+    }
+
+    public Optional<IndexEntryPath> getPathIfNewTitleValid(String newTitle, IndexEntryPath currentPath) {
+        // Given a current path, determines if it is valid to rename this Index/Note to newTitle.
+        // If it is, Optional.of(the new path) is returned.
+        // If not, Optional.empty() is returned
+
+        if (Pattern.compile("[!/]").matcher(newTitle).find()) {
+            // New title must not contain "/" or "!"
+            return Optional.empty();
+        }
+
+        IndexEntryPath parentPath = currentPath.getParentPath();
+        IndexEntryPath potentialNewPath;
+
+        if (currentPath.isNote()) {
+            potentialNewPath = parentPath.getNoteChildPath(newTitle);
+        } else {
+            potentialNewPath = parentPath.getIndexChildPath(newTitle);
+        }
+
+        if (!newTitle.equals(currentPath.getTitle()) && pathExists(potentialNewPath)) {
+            // If the title is edited, the new title should not be identical to other index/note titles at the same level
+            return Optional.empty();
+        }
+
+        return Optional.of(potentialNewPath);
     }
 }
