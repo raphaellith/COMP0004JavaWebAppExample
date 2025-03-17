@@ -206,4 +206,16 @@ public class Model {
 
         return Optional.of(potentialNewPath);
     }
+
+    public String escapeHTML(String input) {
+        if (input == null) {
+            return null;
+        }
+
+        return input.replace("&", "&amp;")  // Ampersand must come first as it is included in other replacements
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
+    }
 }

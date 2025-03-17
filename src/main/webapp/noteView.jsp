@@ -39,8 +39,6 @@
         Delete
     </a>
 
-    <p>
-        <%=note.getContents()%>
-    </p>
+    <p class="noteContents"><%=note.getContents()%></p>
 </body>
 </html>

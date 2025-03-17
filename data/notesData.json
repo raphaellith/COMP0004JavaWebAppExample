@@ -1,1 +1,8 @@
-{"indexTitle":"Main","noteEntries":[{"noteTitle":"New note","contents":"Line <br> New line &\r\n      a"}],"indexEntries":[{"indexTitle":"New index","noteEntries":[],"indexEntries":[]},{"indexTitle":"New index name","noteEntries":[],"indexEntries":[{"indexTitle":"New index","noteEntries":[],"indexEntries":[]}]}]}
+{
+  "indexTitle" : "Main",
+  "noteEntries" : [ {
+    "noteTitle" : "New note",
+    "contents" : "Hey!\r\n\r\n\r\nI just skipped a few lines....\r\n\r\n    Indent here!\r\n\r\nAttack?\r\n\r\n&lt;script&gt;alert(&quot;Does this alert work?&quot;);&lt;/script&gt;\r\n\r\n&lt;b&gt;Bold?&lt;/b&gt;\r\n\r\nYay! No attacks!"
+  } ],
+  "indexEntries" : [ ]
+}
