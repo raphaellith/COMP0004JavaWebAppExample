@@ -9,6 +9,8 @@ import uk.ac.ucl.model.Model;
 
 @WebServlet("/addNote.html")
 public class AddNoteServlet extends AbstractHttpServlet {
+    // Servlet for adding a new note
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("path"));
         Index currentIndex = (Index) model.getEntryByPath(currentPath);

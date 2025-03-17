@@ -4,10 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%
-    Index index = (Index) request.getAttribute("indexObj");
-%>
-
 <head>
     <meta charset="UTF-8">
     <title>Note Collection System</title>
@@ -15,68 +11,66 @@
 </head>
 
 <body>
+    <jsp:include page="header.jsp"/>
 
-<jsp:include page="header.jsp"/>
+    <form method="POST" action="saveIndex.html">
+        <% Index index = (Index) request.getAttribute("indexObj"); %>
 
-<form method="POST" action="saveIndex.html">
-    <h1>
-        Index:
-        <input type="text" class="indexTitleEditInput" name="indexNewTitle" value="<%=index.getTitle()%>">
-    </h1>
+        <h1>
+            Index:
+            <input type="text" class="indexTitleEditInput" name="indexNewTitle" value="<%=index.getTitle()%>">
+        </h1>
 
-    <div style="margin-bottom: 0.75em; font-weight: bold">
-        The title of an index cannot contain the characters "/" or "!".
-        Duplicate sub-index titles in the same index are not allowed.
-    </div>
+        <div style="margin-bottom: 0.75em; font-weight: bold">
+            The title of an index cannot contain the characters "/" or "!".
+            Duplicate sub-index titles in the same index are not allowed.
+        </div>
 
-    <input type="submit" class="button ui-button" value="Save">
+        <input type="submit" class="button ui-button" value="Save">
 
-    <input type="hidden" name="currentPath" value="<%=request.getAttribute("currentPath")%>">
-</form>
+        <input type="hidden" name="currentPath" value="<%=request.getAttribute("currentPath")%>">
+    </form>
 
-<div>
-    <h3>Sub-indices:</h3>
+    <div>
+        <h3>Sub-indices:</h3>
 
-    <%
-        ArrayList<Index> indices = index.getIndexEntries();
-        if (indices.isEmpty()) {
-    %>
-
-    <i>No sub-indices here.</i>
-
-    <% } else { %>
-
-    <ol>
-        <% for (Index i : indices) {
-            String indexTitle = i.getTitle();
+        <%
+            ArrayList<Index> indices = index.getIndexEntries();
+            if (indices.isEmpty()) {
         %>
-        <li><%=indexTitle%>
-        </li>
+
+        <i>No sub-indices here.</i>
+
+        <% } else { %>
+
+        <ol>
+            <% for (Index i : indices) {
+                String indexTitle = i.getTitle();
+            %>
+            <li><%=indexTitle%></li>
+            <% } %>
+        </ol>
         <% } %>
-    </ol>
-    <% } %>
 
-    <div style="margin-bottom: 3em;"></div>
+        <div style="margin-bottom: 3em;"></div>
 
-    <h3>Notes:</h3>
+        <h3>Notes:</h3>
 
-    <%
-        ArrayList<Note> notes = index.getNoteEntries();
-        if (notes.isEmpty()) {
-    %>
+        <%
+            ArrayList<Note> notes = index.getNoteEntries();
+            if (notes.isEmpty()) {
+        %>
 
-    <i>No notes here.</i>
+        <i>No notes here.</i>
 
-    <% } else { %>
+        <% } else { %>
 
-    <ol>
-        <% for (Note n : notes) { %>
-        <li><%=n.getTitle()%>
-        </li>
+        <ol>
+            <% for (Note n : notes) { %>
+            <li><%=n.getTitle()%></li>
+            <%}%>
+        </ol>
         <%}%>
-    </ol>
-    <%}%>
-</div>
-
+    </div>
 </body>
 </html>

@@ -9,6 +9,8 @@ import uk.ac.ucl.model.Model;
 
 @WebServlet("/deleteIndex.html")
 public class DeleteIndexServlet extends AbstractHttpServlet {
+    // Servlet for deleting an existing index
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("path"));
         IndexEntryPath parentIndexPath = currentPath.getParentPath();

@@ -1,8 +1,5 @@
 package uk.ac.ucl.model;
 
-// The main model used to handle operations of the program.
-// The Model object has access to the main Index object.
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -15,30 +12,29 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class Model {
-    private final Index index;
+    // The main model of the program. Only one model, accessed via the ModelFactory, is used throughout the program. .
+
+    private final Index rootIndex;
     private final String notesDataFilePath;
-    private final String rootIndexName;
     private final JsonNode rootJsonNode;
 
     public Model(String notesDataFilePath, String defaultRootIndexName) {
         this.notesDataFilePath = notesDataFilePath;
 
-        this.index = new Index("");  // Placeholder title will be overwritten during readFrom
-        this.rootJsonNode = this.index.readFrom(notesDataFilePath, defaultRootIndexName);
-        this.rootIndexName = rootJsonNode.path("indexTitle").asText();
+        this.rootIndex = new Index("");  // Placeholder title will be overwritten during readFrom
+        this.rootJsonNode = rootIndex.readFrom(notesDataFilePath, defaultRootIndexName);
     }
 
-    public String getRootIndexName() {
-        return this.rootIndexName;
+    public String getRootIndexTitle() {
+        return rootIndex.getTitle();
     }
 
     public IndexEntry getEntryByPath(IndexEntryPath path) {
         path = path.copy();
-        if (!path.removeFirst().equals(rootIndexName)) {
+        if (!path.removeFirst().equals(rootIndex.getTitle())) {
             return null;
         }
-
-        return index.getEntryByPath(path);
+        return rootIndex.getEntryByPath(path);
     }
 
     public boolean pathExists(IndexEntryPath path) {
@@ -49,7 +45,7 @@ public class Model {
         path = path.copy();
         String firstSubstring = path.removeFirst();
 
-        if (!firstSubstring.equals(rootIndexName)) {
+        if (!firstSubstring.equals(rootIndex.getTitle())) {
             return null;
         }
 
@@ -204,6 +200,7 @@ public class Model {
     }
 
     public String escapeHTML(String input) {
+        // Escape special characters for use in HTML to avoid injection
         if (input == null) {
             return null;
         }

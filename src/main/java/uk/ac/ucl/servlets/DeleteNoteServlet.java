@@ -9,6 +9,8 @@ import uk.ac.ucl.model.Model;
 
 @WebServlet("/deleteNote.html")
 public class DeleteNoteServlet extends AbstractHttpServlet {
+    // Servlet for deleting an existing note
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("path"));
         IndexEntryPath parentIndexPath = currentPath.getParentPath();

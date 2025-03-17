@@ -11,18 +11,14 @@
 </head>
 
 <body>
+    <jsp:include page="header.jsp"/>
+    <nav>
+        <% Model model = ModelFactory.getModel(); %>
 
-<jsp:include page="header.jsp"/>
-
-<nav>
-    <%
-        Model model = ModelFactory.getModel();
-    %>
-
-    <a class="button" id="start-button" href=<%="/indexView.html?path=" + model.getRootIndexName()%>>
-        Click here to view notes
-    </a>
-</nav>
+        <a class="button" id="start-button" href=<%="/indexView.html?path=" + model.getRootIndexTitle()%>>
+            Click here to view notes
+        </a>
+    </nav>
 
 </body>
 </html>

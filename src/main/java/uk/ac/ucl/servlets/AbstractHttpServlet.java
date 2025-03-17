@@ -12,6 +12,7 @@ import uk.ac.ucl.model.ModelFactory;
 import java.io.IOException;
 
 public abstract class AbstractHttpServlet extends HttpServlet {
+    // An abstract class representing an HTTP servlet. the handleRequest method handles both GET and POST requests.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         handleRequest(request, response);
@@ -24,7 +25,6 @@ public abstract class AbstractHttpServlet extends HttpServlet {
 
     protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Model model = ModelFactory.getModel();
-
         String destinationJSP = respondAndGetJSP(request, model);
 
         // Invoke the JSP

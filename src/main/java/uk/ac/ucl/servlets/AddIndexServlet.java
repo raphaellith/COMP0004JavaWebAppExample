@@ -9,6 +9,8 @@ import uk.ac.ucl.model.Model;
 
 @WebServlet("/addIndex.html")
 public class AddIndexServlet extends AbstractHttpServlet {
+    // Servlet for adding a new sub-index
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath currentPath = new IndexEntryPath(request.getParameter("path"));
         Index currentIndex = (Index) model.getEntryByPath(currentPath);

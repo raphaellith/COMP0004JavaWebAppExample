@@ -8,6 +8,8 @@ import java.util.Optional;
 
 @WebServlet("/saveNote.html")
 public class SaveNoteServlet extends AbstractHttpServlet {
+    // Servlet that saves changes made to the name/contents of a note
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         String newTitle = request.getParameter("noteNewTitle").strip();  // Strip title to remove whitespaces
         String newContents = request.getParameter("noteNewContents");

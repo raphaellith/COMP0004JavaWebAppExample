@@ -8,6 +8,8 @@ import uk.ac.ucl.model.Note;
 
 @WebServlet("/noteView.html")
 public class ViewNoteServlet extends AbstractHttpServlet {
+    // Servlet that leads to a page where a note can be viewed
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath path = new IndexEntryPath(request.getParameter("path"));
         Note note = (Note) model.getEntryByPath(path);

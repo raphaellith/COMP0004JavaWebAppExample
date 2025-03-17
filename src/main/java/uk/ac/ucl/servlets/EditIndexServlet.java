@@ -6,6 +6,8 @@ import uk.ac.ucl.model.*;
 
 @WebServlet("/editIndex.html")
 public class EditIndexServlet extends AbstractHttpServlet {
+    // Servlet that leads to a page where an existing index can be renamed
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath path = new IndexEntryPath(request.getParameter("path"));
         Index index = (Index) model.getEntryByPath(path);

@@ -7,14 +7,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.io.File;
 import java.io.IOException;
 
 public class Index extends IndexEntry {
-    /*
-    Represents an index. An Index holds a list of notes and a list of sub-indices.
-    */
+    // Represents an index, which holds a list of notes and a list of sub-indices
 
     private final ArrayList<Note> noteEntries;
     private final ArrayList<Index> indexEntries;
@@ -57,21 +54,8 @@ public class Index extends IndexEntry {
         this.noteEntries.clear();
         this.indexEntries.clear();
 
-//        JsonNode jsonNoteEntries = rootNode.path("noteEntries");
-//        Iterator<JsonNode> jsonNoteEntriesIterator = jsonNoteEntries.elements();
-//
-//        while (jsonNoteEntriesIterator.hasNext()) {
-//            JsonNode jsonNoteEntry = jsonNoteEntriesIterator.next();
-//            this.noteEntries.add(
-//                    new Note(
-//                            jsonNoteEntry.path("noteTitle").asText(),
-//                            jsonNoteEntry.path("contents").asText()
-//                    )
-//            );
-//        }
-
+        // Initalise this.noteEntries
         ArrayNode jsonNoteEntries = (ArrayNode) rootNode.path("noteEntries");
-
         for (JsonNode jsonNoteEntry: jsonNoteEntries) {
             this.noteEntries.add(
                     new Note(
@@ -81,22 +65,19 @@ public class Index extends IndexEntry {
             );
         }
 
-        JsonNode jsonIndexEntries = rootNode.path("indexEntries");
-        Iterator<JsonNode> jsonIndexEntriesIterator = jsonIndexEntries.elements();
-
-        while (jsonIndexEntriesIterator.hasNext()) {
-            JsonNode jsonIndexEntry = jsonIndexEntriesIterator.next();
-
-            Index index = new Index("");  // placeholder title will be overwritten via recursion
+        // Initalise this.indexEntries
+        ArrayNode jsonIndexEntries = (ArrayNode) rootNode.path("indexEntries");
+        for (JsonNode jsonIndexEntry: jsonIndexEntries) {
+            Index index = new Index("");  // Placeholder title to be overwritten via recursion
             index.readFrom(jsonIndexEntry);
             this.indexEntries.add(index);
         }
-
     }
 
     public JsonNode readFrom(String notesDataFilePath, String defaultRootIndexName) {
         // Overwrites this.noteEntries and this.indexEntries with the data from the .json file,
         // which is specified using notesDataFilePath.
+        // If the file is not found, a new file with the provided path is created using the defaultRootIndexName.
         // Returns the JsonNode corresponding to this index.
 
         try {
@@ -129,9 +110,6 @@ public class Index extends IndexEntry {
     }
 
     public Note getNoteByTitle(String title) {
-        // Returns a note in the index by title
-        // Returns null if the note is not found
-
         for (Note n: noteEntries) {
             if (n.getTitle().equals(title)) {
                 return n;
@@ -151,9 +129,6 @@ public class Index extends IndexEntry {
     }
 
     public Index getIndexByTitle(String title) {
-        // Returns a sub-index in the index by title
-        // Returns null if the note is not found
-
         for (Index i: indexEntries) {
             if (i.getTitle().equals(title)) {
                 return i;

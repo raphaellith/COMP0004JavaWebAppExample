@@ -1,9 +1,7 @@
 package uk.ac.ucl.model;
 
-// Represents a note.
-// Each note has a title and contents.
-
 public class Note extends IndexEntry {
+    // Represents a note, which has a title and contains textual contents
     private String contents;
 
     public Note(String title, String contents) {

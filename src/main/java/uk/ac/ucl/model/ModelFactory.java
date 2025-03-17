@@ -1,9 +1,7 @@
 package uk.ac.ucl.model;
 
-// Provides other classes access to the Model object via the static method ModelFactory.getModel()
-// There should only be one single Model object throughout the use of the program
-
 public class ModelFactory {
+    // Provides access to the Model object, of which there must only be one throughout the program
     private static Model model;
 
     public static Model getModel() {

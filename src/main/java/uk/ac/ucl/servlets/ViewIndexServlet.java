@@ -9,6 +9,8 @@ import uk.ac.ucl.model.Model;
 
 @WebServlet("/indexView.html")
 public class ViewIndexServlet extends AbstractHttpServlet {
+    // Servlet that leads to a page where an index can be viewed
+
     protected String respondAndGetJSP(HttpServletRequest request, Model model) {
         IndexEntryPath path = new IndexEntryPath(request.getParameter("path"));
         Index index = (Index) model.getEntryByPath(path);

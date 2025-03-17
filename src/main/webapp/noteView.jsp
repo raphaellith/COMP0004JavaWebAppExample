@@ -5,10 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%
-    Note note = (Note) request.getAttribute("noteObj");
-    IndexEntryPath currentPath = (IndexEntryPath) request.getAttribute("currentPath");
-%>
+<% Note note = (Note) request.getAttribute("noteObj"); %>
 
 <head>
     <meta charset="UTF-8">
@@ -24,6 +21,7 @@
     </h1>
 
     <%
+        IndexEntryPath currentPath = (IndexEntryPath) request.getAttribute("currentPath");
         String editHref = "/noteEditView.html?path=" + currentPath.getURLEncoding();
         String backHref = "/indexView.html?path=" + currentPath.getParentPath().getURLEncoding();
         String deleteHref = "/deleteNote.html?path=" + currentPath.getURLEncoding();
