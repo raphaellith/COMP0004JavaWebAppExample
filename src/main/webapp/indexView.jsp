@@ -112,10 +112,13 @@
             Sort Z-A
         </a>
         <a class="button ui-button" href=<%=currentURL + "&ordering=sl"%>>
-            Sort by increasing character count
+            Sort by increasing length
         </a>
         <a class="button ui-button" href=<%=currentURL + "&ordering=ls"%>>
-            Sort by decreasing character count
+            Sort by decreasing length
+        </a>
+        <a class="button ui-button" href=<%=currentURL%>>
+            Cancel sorting
         </a>
     </nav>
 </body>
