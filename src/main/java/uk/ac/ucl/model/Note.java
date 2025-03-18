@@ -17,6 +17,10 @@ public class Note extends IndexEntry {
         this.contents = contents;
     }
 
+    public int charCount() {
+        return contents.replaceAll("\\s", "").length();  // Char count, excluding whitespaces
+    }
+
     @Override
     public IndexEntry getEntryByPath(IndexEntryPath path) {
         if (path.isEmpty()) {

@@ -16,6 +16,7 @@
     <%
         Index index = (Index) request.getAttribute("indexObj");
         IndexEntryPath currentPath = (IndexEntryPath) request.getAttribute("currentPath");
+        NoteOrdering noteOrdering = (NoteOrdering) request.getAttribute("ordering");
     %>
 
     <h1>Index: <span style="font-weight: normal"><%=index.getTitle()%></span></h1>
@@ -84,7 +85,10 @@
         <% } else { %>
 
         <ol>
-            <% for (Note n : notes) { %>
+            <%
+                NoteSorter.sort(notes, noteOrdering);
+                for (Note n : notes) {
+            %>
             <li>
                 <a href=<%="noteView.html?path=" + currentPath.getNoteChildPath(n.getTitle()).getURLEncoding()%>>
                     <%=n.getTitle()%>
@@ -94,9 +98,24 @@
         </ol>
         <%}%>
 
-        <% String addNoteHref = "/addNote.html?path=" + currentPath.getURLEncoding(); %>
+        <%
+            String addNoteHref = "/addNote.html?path=" + currentPath.getURLEncoding();
+            String currentURL = "/indexView.html?path=" + currentPath.getURLEncoding();
+        %>
         <a class="button ui-button" href="<%=addNoteHref%>">
             Add
+        </a>
+        <a class="button ui-button" href=<%=currentURL + "&ordering=az"%>>
+            Sort A-Z
+        </a>
+        <a class="button ui-button" href=<%=currentURL + "&ordering=za"%>>
+            Sort Z-A
+        </a>
+        <a class="button ui-button" href=<%=currentURL + "&ordering=sl"%>>
+            Sort by increasing character count
+        </a>
+        <a class="button ui-button" href=<%=currentURL + "&ordering=ls"%>>
+            Sort by decreasing character count
         </a>
     </nav>
 </body>

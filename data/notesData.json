@@ -4,5 +4,9 @@
     "noteTitle" : "How notes are formatted",
     "contents" : "The Note Collection System formats notes using a subset of Markdown syntax, as described below.\r\n\r\nTwo or more newlines result in a new paragraph. Unlike in HTML, consecutive spaces in the same               paragraph are be collapsed into one.\r\n\r\nSupported forms of in-line formatting include:\r\n\r\n- Text can be made italic using *asterisks* or _underscores_.\r\n- Text can also be made bold, again using **asterisks** or __underscores__.\r\n- Text can be made simultaneously ***bold*** and ___italic___.\r\n- Text can be made ```monospace``` like so.\r\n\r\nAs shown above, a paragraph can be displayed as a bulleted list. It can also be displayed as a numbered list...\r\n\r\n1. Like this.\r\n1. And this.\r\n\r\nFurthermore, an entire paragraph can be monospace...\r\n\r\n```\r\n...like this. This is the paragraph equivalent of the in-line monospaced formatting shown above.\r\n```\r\n\r\nFinally,\r\n\r\n&gt; This is a block quote!\r\n&gt; This can be used for formatting quotations or other text that should be indented.\r\n\r\nTo avoid injection attacks, special characters in HTML are automatically escaped. This means that we can type something like\r\n\r\n&gt; &lt;script&gt;alert(&quot;Pop up&quot;);&lt;/script&gt;\r\n\r\nwithout an actual alert popping up.\r\n\r\n\r\n\r\n\r\n\r\n"
   } ],
-  "indexEntries" : [ ]
+  "indexEntries" : [ {
+    "indexTitle" : "New index",
+    "noteEntries" : [ ],
+    "indexEntries" : [ ]
+  } ]
 }
