@@ -49,11 +49,11 @@ public class IndexEntryPath {
         return new ArrayList<>(Arrays.asList(parsedPathArray));
     }
 
-    public ArrayList<String> getParsed() {
+    private ArrayList<String> getParsed() {
         return parsed;
     }
 
-    public String getUnparsed() {
+    private String getUnparsed() {
         return String.join("/", parsed);
     }
 

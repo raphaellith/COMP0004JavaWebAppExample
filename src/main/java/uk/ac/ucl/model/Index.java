@@ -22,7 +22,7 @@ public class Index extends IndexEntry {
         this.indexEntries = new ArrayList<>();
     }
 
-    public void createDefaultNotesDataFile(File file, String rootIndexName) throws IOException {  // Called when JSON data file is not found
+    private void createDefaultNotesDataFile(File file, String rootIndexName) throws IOException {  // Called when JSON data file is not found
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 
         /*
@@ -48,7 +48,7 @@ public class Index extends IndexEntry {
         bufferedWriter.close();
     }
 
-    public void readFrom(JsonNode rootNode) {  // For initialisation
+    private void readFrom(JsonNode rootNode) {  // For initialisation
         this.setTitle(rootNode.path("indexTitle").asText().strip());
 
         this.noteEntries.clear();
@@ -105,7 +105,7 @@ public class Index extends IndexEntry {
         return indexEntries;
     }
 
-    public Note getNoteByTitle(String title) {
+    private Note getNoteByTitle(String title) {
         for (Note n: noteEntries) {
             if (n.getTitle().equals(title)) {
                 return n;
@@ -124,7 +124,7 @@ public class Index extends IndexEntry {
         }
     }
 
-    public Index getIndexByTitle(String title) {
+    private Index getIndexByTitle(String title) {
         for (Index i: indexEntries) {
             if (i.getTitle().equals(title)) {
                 return i;

@@ -73,7 +73,6 @@ public class Model {
                 Iterator<JsonNode> jsonIndexEntriesIterator = jsonIndexEntries.elements();
 
                 currIndexNode = null;
-
                 while (jsonIndexEntriesIterator.hasNext()) {
                     JsonNode jsonIndexEntry = jsonIndexEntriesIterator.next();
                     if (jsonIndexEntry.path("indexTitle").asText().equals(head)) {
@@ -90,7 +89,7 @@ public class Model {
         return currIndexNode;
     }
 
-    public void writeChangesToJsonFile() {
+    private void writeChangesToJsonFile() {
         try {
             ObjectMapper mapper = ObjectMapperFactory.getMapper();
             mapper.writeValue(new File(notesDataFilePath), rootJsonNode);
