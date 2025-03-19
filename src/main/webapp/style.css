@@ -67,11 +67,6 @@ a {
     font-family: Arial, sans-serif;
 }
 
-/*.noteContents {*/
-/*    !* To preserve formatting of notes *!*/
-/*    white-space: pre;*/
-/*}*/
-
 .codeBlock {
     font-family: monospace;
     white-space: pre;
